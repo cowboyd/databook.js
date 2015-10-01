@@ -1,0 +1,27 @@
+{
+  "name": "databook",
+  "main": "index.js",
+  "version": "0.1.0",
+  "authors": [
+    "Charles Lowell <cowboyd@frontside.io>"
+  ],
+  "description": "An API to put the fun back in asynchronous, paginated datasets",
+  "moduleType": [
+    "es6"
+  ],
+  "keywords": [
+    "dataset"
+  ],
+  "license": "MIT",
+  "homepage": "http://github.com/cowboyd/databook.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "chai": "~3.3.0"
+  }
+}

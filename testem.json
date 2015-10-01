@@ -1,0 +1,15 @@
+{
+  "framework": "mocha",
+  "serve_files": [
+    "index.js",
+    "bower_components/chai/chai.js",
+    "test/*-test.js"
+  ],
+  "src_files": [
+    "src/*.js",
+    "test/*-test.js"
+  ],
+  "launch_in_ci": ["PhantomJS"],
+  "launch_in_dev": ["PhantomJS", "Chrome"],
+  "before_tests": "node_modules/.bin/webpack -d"
+}
