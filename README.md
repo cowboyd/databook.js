@@ -1,6 +1,4 @@
-```js
-import Dataset from 'dataset';
-import getStuff from 'get-stuff';
+```js import Dataset from 'dataset'; import getStuff from 'get-stuff';
 
 // Dataset.js is a JavaScript only object for navigating through paged
 // data. It understands that rendering a paged dataset in realtime as

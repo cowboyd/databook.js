@@ -1,3 +1,5 @@
-import Databook from './databook';
+/*global define */
 
-window.Databook = Databook;
+import Dataset from './dataset';
+
+window.Dataset = Dataset;

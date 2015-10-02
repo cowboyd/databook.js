@@ -1,6 +1,7 @@
 {
-  "name": "databook",
+  "name": "dataset",
   "version": "0.1.0",
+  "private": true,
   "description": "An API to put the fun back in asynchronous, paginated datasets",
   "main": "index.js",
   "repository": {

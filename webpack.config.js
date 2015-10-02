@@ -1,13 +1,13 @@
 module.exports = {
-  entry  : './src/main.js',
-  output : {
-    path     : __dirname,
-    filename : 'index.js'
+  entry : './src/main.js',
+  output: {
+    path: __dirname,
+    filename: 'dist/dataset.js'
   },
-  module : {
+  module: {
     loaders: [{
-      test   : /.js$/,
-      loader : 'babel-loader'
+      test: /.js$/,
+      loader: 'babel-loader'
     }]
   }
 };

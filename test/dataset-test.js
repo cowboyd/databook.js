@@ -2,11 +2,11 @@
 
 var expect = chai.expect;
 
-describe("Databook", function() {
+describe("Dataset", function() {
   it("exists", function() {
-    expect(Databook).not.to.be.undefined;
+    expect(Dataset).not.to.be.undefined;
   });
   it("can be instantiated", function() {
-    expect(new Databook()).to.be.instanceOf(Databook);
+    expect(new Dataset()).to.be.instanceOf(Dataset);
   });
 });
