@@ -203,5 +203,6 @@ dataset.setLastPage(3);
 
 ```
 $ npm install
-$ npm test ci
+$ npm test ci # run tests from command line
+$ npm test # run test server
 ```
