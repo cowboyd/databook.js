@@ -5,17 +5,8 @@ var Dataset = window.Dataset;
 
 describe("Dataset", function() {
   describe("with no fetch function", function() {
-
-    it("initializes the model", function() {
-      expect(this.model).to.be.instanceOf(Object);
-      expect(this.model.totalSize).to.equal(0);
-    });
-    it("indicates that the dataset is not doing any loading", function() {
-      expect(this.model.isPending).to.equal(false);
-      expect(this.model.isResolved).to.equal(true);
-      expect(this.model.isRejected).to.equal(false);
-      expect(this.model.isSettled).to.equal(true);
-    });
+    it("emits an observation of the state");
+    it("indicates that the dataset is not doing any loading");
   });
 
   describe("with a fetch function and the default load horizon", function() {
@@ -37,6 +28,6 @@ describe("Dataset", function() {
   afterEach(function() {
     delete this.dataset;
     delete this.model;
-    delete this.fetch;
+    delete this.fetches;
   });
 });
