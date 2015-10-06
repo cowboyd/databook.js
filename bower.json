@@ -23,6 +23,7 @@
     "tests"
   ],
   "devDependencies": {
-    "chai": "~3.3.0"
+    "chai": "~3.3.0",
+    "es6-promise": "~3.0.2"
   }
 }

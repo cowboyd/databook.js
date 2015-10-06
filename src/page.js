@@ -24,7 +24,6 @@ class PendingPage extends UnrequestedPage {
     super(unrequested.offset, unrequested.size);
   }
 
-  get isRequested() { return true; }
   get isPending() { return true; }
 
   resolve(records) {

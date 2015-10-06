@@ -3,6 +3,7 @@
   "serve_files": [
     "dist/dataset.js",
     "bower_components/chai/chai.js",
+    "bower_components/es6-promise/promise.js",
     "test/*-test.js"
   ],
   "src_files": [
