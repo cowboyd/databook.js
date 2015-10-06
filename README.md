@@ -2,6 +2,8 @@
 
 import Dataset from 'dataset'; import getStuff from 'get-stuff';
 
+let currentState = null;
+
 // Dataset.js is a JavaScript only object for navigating through paged
 // data. It understands that rendering a paged dataset in realtime as
 // it is incrementally and asynchronously loaded is no mean feat, and
@@ -17,6 +19,15 @@ import Dataset from 'dataset'; import getStuff from 'get-stuff';
 // visualization of said dataset.
 let dataset = new Dataset({
 
+  // Dataset does not emit events in the classical sense. Instead, it works by
+  // publishing a new, immutable version of its model in its entirety, any time
+  // there is a change of any significance. You can observe this state with a
+  // function.
+
+  observe: function(state) {
+    currentState = state;
+  },
+
   // the fetch function gets passed two parameters, `pageOffset` which says
   // which page in the whole dataset this request should fetch, and a `stats`
   // object which can be used to say things about the dataset as a whole (such
@@ -24,32 +35,27 @@ let dataset = new Dataset({
   //
   // This function should return a promise that yields an array of
   // records corresponding to the contens of that page.
-  fetch: function(pageOffset, stats) {
-    // we are going to request pages with 10 records, so we can set the stats
-    stats.pageSize = 10;
+  fetch: function(pageOffset, pageSize, stats) {
+    // make the request
     return getStuff({limit: 10, offset: pageOffset}).then(function(result) {
       // you have the opportunity to set dataset level metadata
       // from your response if you want.
-      stats.pageCount = result.metadata.pageCount;
+      stats.totalPages = result.metadata.pageCount;
+      stats.totalRecords = result.metadat.recordCount;
       return result;
     });
   },
 
-  // We can tell the dataset at our option that this is the maximum
-  // number of pages that are allowed to be loaded into memory at a
-  // given time. See the examples below.
-  maximumPages: 2
+  // We can tell the dataset that wherever the read offset is, we want to make
+  // sure that two pages are loaded in front and behind
+  loadHorizion: 2,
+
+  // If a page is outside the unloadHorizon, then it will be unloaded so that
+  // the memory can be reclaimed. Infinity is the default value, which means
+  // "don't ever unload"
+  unloadHorizon: Infinity
 });
 
-// Dataset does not emit events in the classical sense. Instead, it works by
-// publishing a new, immutable version of its model in its entirety, any time
-// there is a change of any significance. We'll listen to this change for
-// demonstrative purposes.
-
-let currentState = dataset.currentState;
-dataset.subscribe(function(version) {
-  currentState = version;
-});
 
 // the current state starts out completely empty.
 currentState === {
@@ -57,13 +63,11 @@ currentState === {
 };
 
 // let's fetch a couple of pages in the dataset. We do this by telling
-// the dataset what we want our last page to be, and what what our
-// first page should be. By default, the first page is at offset 0
-// that It will return a promise which you can listen to, but that's
-// not really necessary, since a newer version of the model will be
-// published as an event letting you know that there are some pages in
-// flight.
-dataset.setLastPage(2);
+// the dataset what we want to set the read offset to `2`. Because our load
+// horizon is two, this will result in pages 0,1,2,3 being loaded. Since a newer
+// version of the model will be published as an event letting you know
+// that there are some pages in  flight.
+dataset.setReadOffset(2);
 
 // It will emit something like this. Note that the pages are
 // requested, but not yet loaded. There is going to be a request in
