@@ -198,3 +198,10 @@ dataset.setLastPage(3);
 //
 // By the same token, now seting the first page to page 1, it will unload page 3
 ```
+
+## Develoment
+
+```
+$ npm install
+$ npm test ci
+```
